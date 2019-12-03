@@ -1,0 +1,16 @@
+<html>
+	<h1>Find the Song lyrics!!</h1>
+	{% if render_answer == None %}
+		<form action="/lyrics">
+			<h1> Input the song! </h1>
+				<input name='input1' type="text">
+				<input type="submit">
+		</form>
+	{% else %}
+		<h1>{render_answer}</h1>
+		<form action="/">
+			<input type="submit" value='back to home'>
+		</form>
+	{% endif %}
+</html>
+
