@@ -1,0 +1,40 @@
+version: "3"
+services:
+  flask-app:
+    image: jun2mun/flask:test
+    depends_on:
+      - jun2mun/nginx:test
+    deploy:
+        replicas: 2
+        restart_policy:
+            condition: on-failure
+    ports:
+      - 5000:5000
+    networks:
+      - frontend
+
+  nginx-server:
+    image: jun2mun/nginx:test
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    networks:
+      - backend
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - 8080:8080
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
