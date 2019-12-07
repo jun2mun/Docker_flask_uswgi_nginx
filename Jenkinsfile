@@ -7,15 +7,15 @@
          checkout scm
      }
 
+     dir("flask"){
+         sh 'pwd'
+     }
      stage('Build image') {
          /* This builds the actual image; synonymous to
          * docker build on the command line */
-         dir("nginx"){
-             app = docker.build("jun2mun/jenkins-flask_uswgi_nginx/")
-         }
-         dir("../flask"){
-            app = docker.build("jun2mun/jenkins-flask_uswgi_nginx/")
-         }
+         
+        app = docker.build("jun2mun/jenkins-flask_uswgi_nginx/")
+         
      }
 
      stage('Test image') {
