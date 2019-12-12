@@ -6,9 +6,6 @@
 
          checkout scm
      }
-     stage('visualizer image'){
-        sh 'docker pull v   
-     }
      dir("flask"){
         /* This builds the actual image; synonymous to
          * docker build on the command line */
