@@ -13,7 +13,7 @@
         /* This builds the actual image; synonymous to
          * docker build on the command line */
       stage('Build image'){
-         sh 'docker build -t jun2mun/flask:pipeline .'
+         sh 'docker build -t jun2mun/flask:test .'
       }
      }
      dir("nginx"){
@@ -21,7 +21,7 @@
          * docker build on the command line */
       stage('Build image'){
          sh 'ls'
-         sh 'docker build -t jun2mun/nginx:pipline .'
+         sh 'docker build -t jun2mun/nginx:test .'
       }
      }
 
@@ -31,8 +31,8 @@
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-             sh 'docker push jun2mun/flask:pipleine
-             sh 'docker push jun2mun/nginx:pipeline
+             sh 'docker push jun2mun/flask:test
+             sh 'docker push jun2mun/nginx:test
          }
      }
  }
