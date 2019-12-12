@@ -6,6 +6,9 @@
 
          checkout scm
      }
+     stage('image visualizer') {
+         sh 'docker pull dockersamples/visualizer'
+     }
      dir("flask"){
         /* This builds the actual image; synonymous to
          * docker build on the command line */
@@ -20,10 +23,6 @@
          sh 'ls'
          sh 'docker build -t jun2mun/nginx:pipline .'
       }
-     }
-
-     stage('Test image') {
-         sh 'docker run ---name web -d -p 5000:5000 jun2mun/flask:pipeline
      }
 
      stage('Push image') {
