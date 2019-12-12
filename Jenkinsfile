@@ -6,12 +6,14 @@
 
          checkout scm
      }
-
+     stage('visualizer image'){
+        sh 'docker pull v   
+     }
      dir("flask"){
         /* This builds the actual image; synonymous to
          * docker build on the command line */
       stage('Build image'){
-         sh 'docker build -t flask:test .'
+         sh 'docker build -t jun2mun/flask:pipeline .'
       }
      }
      dir("nginx"){
@@ -19,14 +21,12 @@
          * docker build on the command line */
       stage('Build image'){
          sh 'ls'
-         sh 'docker build -t nginx:test .'
+         sh 'docker build -t jun2mun/nginx:pipline .'
       }
      }
 
      stage('Test image') {
-         app.inside {
-             sh 'echo "Tests passed"'
-         }
+         sh 'docker run ---name web -d -p 5000:5000 jun2mun/flask:pipeline
      }
 
      stage('Push image') {
@@ -35,8 +35,8 @@
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-             app.push("${env.BUILD_NUMBER}")
-             app.push("latest")
+             sh 'docker push jun2mun/flask:pipleine
+             sh 'docker push jun2mun/nginx:pipeline
          }
      }
  }
