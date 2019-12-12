@@ -14,7 +14,7 @@
          /* This builds the actual image; synonymous to
          * docker build on the command line */
          
-        app = docker.build("jun2mun/jenkins-flask_uswgi_nginx/")
+        app = docker.build("jun2mun/jenkins-flask_uswgi_nginx/flask")
          
      }
 
