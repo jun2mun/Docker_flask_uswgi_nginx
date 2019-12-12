@@ -18,6 +18,7 @@
         /* This builds the actual image; synonymous to
          * docker build on the command line */
       stage('Build image'){
+         sh 'ls'
          sh 'docker build -t nginx:test .'
       }
      }
