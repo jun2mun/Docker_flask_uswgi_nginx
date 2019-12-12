@@ -8,15 +8,18 @@
      }
 
      dir("flask"){
-         sh 'pwd'
-     }
-     stage('Build image') {
-         /* This builds the actual image; synonymous to
+        /* This builds the actual image; synonymous to
          * docker build on the command line */
-         
-        sh 'docker build -t jun2mun/Docker_flask_uswgi_nginx/flask'
-        sh 'docker build -t jun2mun/Docker_flask_uswgi_nginx/nginx'
-         
+      stage('Build image'){
+         sh 'docker build -t flask:test .'
+      }
+     }
+     dir("../nginx"){
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+      stage('Build image'){
+         sh 'docker build -t nginx:test .'
+      }
      }
 
      stage('Test image') {
